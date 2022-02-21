@@ -1,7 +1,7 @@
 # About
 This application is a reproduction of the top page of [monopo's website](https://monopo.vn/).<br>
 
-You can learn more about the implementation through akella's great live coding videos.<br>
+You can learn more about the implementation through [akella（@akella）](https://twitter.com/akella)'s great live coding videos.<br>
 [Beautiful noise with three.js from monopo.vn #1](https://www.youtube.com/watch?v=sPBb-0al7Y0)
 
 https://nemutas.github.io/r3f-monopo/
