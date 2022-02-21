@@ -1,46 +1,33 @@
-# Getting Started with Create React App
+# About
+This application is a reproduction of the top page of [monopo's website](https://monopo.vn/).<br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can learn more about the implementation through akella's great live coding videos.<br>
+[Beautiful noise with three.js from monopo.vn #1](https://www.youtube.com/watch?v=sPBb-0al7Y0)
 
-## Available Scripts
+https://nemutas.github.io/r3f-monopo/
 
-In the project directory, you can run:
+<img src='https://user-images.githubusercontent.com/46724121/154985223-1f7d8ab0-799f-49d8-a41d-9abc2510435d.png' width='600px'/>
 
-### `npm start`
+# Technology
+* TypeScript
+* React
+* React Three Fiber（Three.js）
+* [CubeCamera](https://threejs.org/docs/#api/en/cameras/CubeCamera)
+* GLSL
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Reference
+* [monopo](https://monopo.vn/)
+* [Beautiful noise with three.js from monopo.vn #1](https://www.youtube.com/watch?v=sPBb-0al7Y0)
+* [Fresnel Demo](http://lab.firejune.com/three/examples/webgl_materials_shaders_fresnel.html)
+* [CubeCamera Demo](https://threejs.org/examples/#webgl_materials_cubemap_dynamic)
+* [FresnelShader](https://github.com/ebrahma/threejs_div_testing/blob/b5aa918fba0da04e5b78ee6168450945b5630b71/js/three-lib/shaders/FresnelShader.js)
+* [GLSL Noise](https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83)
+* [GLSL Random using Gelfond's constant](https://github.com/th3-z/nit3dyne/blob/8aafdcc8e35ad60453d0d439863749e83c53ef2c/nit3dyne/shaders/post.frag)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# License
+This source code is not MIT License.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+❌ Commercial use is prohibited.<br>
+❌ Redistribution is prohibited.<br>
+❌ Diversion is prohibited.<br>
+✅ you can possible to learn by looking at the code and to use parts of it.
