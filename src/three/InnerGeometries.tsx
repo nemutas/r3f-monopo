@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import React, { useEffect, useMemo, useRef, VFC } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, VFC } from 'react';
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
@@ -30,31 +30,24 @@ export const InnerGeometries: VFC = () => {
 	const sphereGeometry = new THREE.IcosahedronGeometry(0.4, 20)
 	const torusGeometry = new THREE.TorusGeometry(0.4, 0.1, 50, 100)
 
-	const model = useGLTF(getPublicPath('/assets/models/rabbit.glb'))
+	const model = useGLTF(getPublicPath('/assets/models/Stanford_Bunny.glb'))
 	const rabbitGeometry = (model.nodes.Rabbit as THREE.Mesh).geometry
-	rabbitGeometry.applyMatrix4(new THREE.Matrix4().makeScale(0.2, 0.2, 0.2))
-	rabbitGeometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0, -0.25, 0))
 
 	// set animation
-	useEffect(() => {
-		const animation = () => {
-			const currentMesh = refs[geometryAnimationState.current]
-			const nextMesh = refs[geometryAnimationState.next()]
+	const animation = useCallback(() => {
+		const currentMesh = refs[geometryAnimationState.current]
+		const nextMesh = refs[geometryAnimationState.next()]
 
-			nextMesh.current!.visible = true
+		nextMesh.current!.visible = true
 
-			const tl = gsap.timeline({
-				onComplete: () => {
-					geometryAnimationState.current = geometryAnimationState.next()
-					currentMesh.current!.visible = false
-				}
-			})
-			tl.to(currentMesh.current!.scale, { x: 0, y: 0, z: 0, duration: 0.5, ease: 'power4.out' })
-			tl.to(nextMesh.current!.scale, { x: 1, y: 1, z: 1, duration: 1, ease: 'elastic.out(1, 0.3)' }, '< 0.2')
-		}
-
-		const id = setInterval(animation, 10000)
-		return () => clearInterval(id)
+		const tl = gsap.timeline({
+			onComplete: () => {
+				geometryAnimationState.current = geometryAnimationState.next()
+				currentMesh.current!.visible = false
+			}
+		})
+		tl.to(currentMesh.current!.scale, { x: 0, y: 0, z: 0, duration: 0.5, ease: 'power4.out' })
+		tl.to(nextMesh.current!.scale, { x: 1, y: 1, z: 1, duration: 1, ease: 'elastic.out(1, 0.3)' }, '< 0.2')
 	}, [])
 
 	// create mouse event
@@ -66,6 +59,13 @@ export const InnerGeometries: VFC = () => {
 
 	// frame loop
 	useFrame(({ size }) => {
+		// aniamtion
+		if (geometryAnimationState.enabledAniamtion) {
+			animation()
+			geometryAnimationState.enabledAniamtion = false
+		}
+
+		// mouse motion
 		mouse2d.updateClientDimension(size.width, size.height)
 		const mouse = mouse2d.NormalizedPosition
 		mouse.addScalar(-0.5).multiplyScalar(2)
@@ -90,10 +90,12 @@ export const InnerGeometries: VFC = () => {
 // ========================================================
 type InnerGeometryProps = {
 	geometry: THREE.BufferGeometry
+	scale?: number
+	position?: [number, number, number]
 }
 
 const InnerGeometry: VFC<InnerGeometryProps> = props => {
-	const { geometry } = props
+	const { geometry, scale = 1, position = [0, 0, 0] } = props
 
 	const meshRef = useRef<THREE.Mesh>(null)
 
@@ -137,7 +139,7 @@ const InnerGeometry: VFC<InnerGeometryProps> = props => {
 	})
 
 	return (
-		<mesh ref={meshRef} geometry={geometry}>
+		<mesh ref={meshRef} geometry={geometry} position={position} scale={scale}>
 			<shaderMaterial args={[shader]} side={THREE.DoubleSide} />
 		</mesh>
 	)

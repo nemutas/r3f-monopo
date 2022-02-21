@@ -2,14 +2,22 @@ import gsap from 'gsap';
 import React, { useEffect, VFC } from 'react';
 import { useSnapshot } from 'valtio';
 import { css, cx } from '@emotion/css';
-import { loadState } from '../modules/store';
+import { geometryAnimationState, loadState } from '../modules/store';
 
 export const ProgressBar: VFC = () => {
 	const loadSnap = useSnapshot(loadState)
 
 	useEffect(() => {
 		if (loadSnap.completed) {
-			gsap.to('.progress-animation', { width: '100%', ease: 'none', duration: 10, repeat: -1 })
+			gsap.to('.progress-animation', {
+				width: '100%',
+				ease: 'none',
+				duration: 10,
+				repeat: -1,
+				onRepeat: () => {
+					geometryAnimationState.enabledAniamtion = true
+				}
+			})
 		}
 	}, [loadSnap])
 
