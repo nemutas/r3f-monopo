@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/r3f-monopo/static/css/main.57ba0322.css",
-    "main.js": "/r3f-monopo/static/js/main.02405d15.js",
+    "main.js": "/r3f-monopo/static/js/main.748cc6b2.js",
     "static/js/787.d5372f2a.chunk.js": "/r3f-monopo/static/js/787.d5372f2a.chunk.js",
     "index.html": "/r3f-monopo/index.html",
     "main.57ba0322.css.map": "/r3f-monopo/static/css/main.57ba0322.css.map",
-    "main.02405d15.js.map": "/r3f-monopo/static/js/main.02405d15.js.map",
+    "main.748cc6b2.js.map": "/r3f-monopo/static/js/main.748cc6b2.js.map",
     "787.d5372f2a.chunk.js.map": "/r3f-monopo/static/js/787.d5372f2a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.57ba0322.css",
-    "static/js/main.02405d15.js"
+    "static/js/main.748cc6b2.js"
   ]
 }
