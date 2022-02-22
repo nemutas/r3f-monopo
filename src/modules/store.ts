@@ -34,4 +34,4 @@ export const geometryAnimationState: GeometryAnimationState = {
 	enabledAniamtion: false
 }
 
-export const Geometries = ['Sphere', 'Torus', 'Rabbit'] as const
+export const Geometries = ['Sphere', 'Torus', 'Teapot', 'Rabbit'] as const

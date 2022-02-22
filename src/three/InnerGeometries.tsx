@@ -23,6 +23,7 @@ export const InnerGeometries: VFC = () => {
 	const refs = {
 		Sphere: useRef<THREE.Group>(null),
 		Torus: useRef<THREE.Group>(null),
+		Teapot: useRef<THREE.Group>(null),
 		Rabbit: useRef<THREE.Group>(null)
 	}
 
@@ -30,8 +31,11 @@ export const InnerGeometries: VFC = () => {
 	const sphereGeometry = new THREE.IcosahedronGeometry(0.4, 20)
 	const torusGeometry = new THREE.TorusGeometry(0.4, 0.1, 50, 100)
 
-	const model = useGLTF(getPublicPath('/assets/models/Stanford_Bunny.glb'))
-	const rabbitGeometry = (model.nodes.Rabbit as THREE.Mesh).geometry
+	const teapot = useGLTF(getPublicPath('/assets/models/Teapot.glb'))
+	const teapotGeometry = (teapot.nodes.Teapot as THREE.Mesh).geometry
+
+	const rabbit = useGLTF(getPublicPath('/assets/models/Stanford_Bunny.glb'))
+	const rabbitGeometry = (rabbit.nodes.Rabbit as THREE.Mesh).geometry
 
 	// set animation
 	const animation = useCallback(() => {
@@ -79,6 +83,9 @@ export const InnerGeometries: VFC = () => {
 			</group>
 			<group ref={refs.Torus} visible={false} scale={0}>
 				<InnerGeometry geometry={torusGeometry} />
+			</group>
+			<group ref={refs.Teapot} visible={false} scale={0}>
+				<InnerGeometry geometry={teapotGeometry} />
 			</group>
 			<group ref={refs.Rabbit} visible={false} scale={0}>
 				<InnerGeometry geometry={rabbitGeometry} />
