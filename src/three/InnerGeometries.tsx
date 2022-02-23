@@ -170,7 +170,7 @@ void main() {
   vec3 norm = normal;
 
   pos += noise(pos);
-  // norm += noise(normal);
+  norm += noise(norm);
 
   vec4 mvPosition = modelViewMatrix * vec4( pos, 1.0 );
   vec4 worldPosition = modelMatrix * vec4( pos, 1.0 );
