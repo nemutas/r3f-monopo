@@ -1,11 +1,10 @@
 import gsap from 'gsap';
-import React, { useCallback, useEffect, useMemo, useRef, VFC } from 'react';
+import React, { useCallback, useMemo, useRef, VFC } from 'react';
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { cnoise31 } from '../modules/glsl';
 import { GUIController } from '../modules/gui';
-import { Mouse2D } from '../modules/mouse2d';
 import { geometryAnimationState, innerGeometryState } from '../modules/store';
 import { getPublicPath } from '../modules/utils';
 
@@ -37,7 +36,7 @@ export const InnerGeometries: VFC = () => {
 	const rabbit = useGLTF(getPublicPath('/assets/models/Stanford_Bunny.glb'))
 	const rabbitGeometry = (rabbit.nodes.Rabbit as THREE.Mesh).geometry
 
-	// set animation
+	// create animation
 	const animation = useCallback(() => {
 		const currentMesh = refs[geometryAnimationState.current]
 		const nextMesh = refs[geometryAnimationState.next()]
@@ -54,15 +53,9 @@ export const InnerGeometries: VFC = () => {
 		tl.to(nextMesh.current!.scale, { x: 1, y: 1, z: 1, duration: 1, ease: 'elastic.out(1, 0.3)' }, '< 0.2')
 	}, [])
 
-	// create mouse event
-	const mouse2d = useMemo(() => new Mouse2D(), [])
-
-	useEffect(() => {
-		return () => mouse2d.dispose()
-	}, [mouse2d])
-
 	// frame loop
-	useFrame(({ size }) => {
+	const vec3 = new THREE.Vector3()
+	useFrame(({ mouse, viewport }) => {
 		// aniamtion
 		if (geometryAnimationState.enabledAniamtion) {
 			animation()
@@ -70,10 +63,10 @@ export const InnerGeometries: VFC = () => {
 		}
 
 		// mouse motion
-		mouse2d.updateClientDimension(size.width, size.height)
-		const mouse = mouse2d.NormalizedPosition
-		mouse.addScalar(-0.5).multiplyScalar(2)
-		parentRef.current!.lookAt(mouse.x, mouse.y, 1)
+		const x = (mouse.x * viewport.width) / 2
+		const y = (mouse.y * viewport.height) / 2
+		vec3.lerp(new THREE.Vector3(x, y, 1), 0.2)
+		parentRef.current!.lookAt(vec3)
 	})
 
 	return (
