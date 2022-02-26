@@ -1,6 +1,7 @@
 import React, { VFC } from 'react';
 import { css } from '@emotion/css';
 import { TCanvas } from '../three/TCanvas';
+import { LinkIconButton } from './LinkIconButton';
 import { ProgressBar } from './ProgressBar';
 
 export const App: VFC = () => {
@@ -8,6 +9,7 @@ export const App: VFC = () => {
 		<div className={styles.container}>
 			<TCanvas />
 			<ProgressBar />
+			<LinkIconButton imagePath="/assets/icons/github.svg" linkPath="https://github.com/nemutas/r3f-monopo" />
 		</div>
 	)
 }
